@@ -1,5 +1,4 @@
 // @flow
-'use strict'
 /* eslint-env browser */
 
 export function bubbleSortFactory (

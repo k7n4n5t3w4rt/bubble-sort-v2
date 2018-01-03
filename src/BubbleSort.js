@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { bubbleSortFactory } from './bubble-sort/index.js'
 import { gridDisplay } from './grid-display/index.js'
 // CSS
-import './App.css';
+import './BubbleSort.css';
 import './grid-display/main.css';
 import './grid-display/font-awesome/css/font-awesome.min.css';
 
