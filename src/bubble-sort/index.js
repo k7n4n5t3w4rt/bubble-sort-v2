@@ -111,7 +111,7 @@ export function bubbleSortFactory (
 
   function reloadIfFinishedLooping (
     reloadInterval /* :number */
-  ) /* :void */ {
+  ) /*: void */ {
     if (allAlgorithmsHaveFinished()) {
       setReload(reloadInterval)
     }
@@ -138,37 +138,51 @@ export function bubbleSortFactory (
   }
 
   function swap (
-    a/* :Array<Object> */,
-    _1/* :number */,
-    _2/* :number */
-  ) /* Promise<Array<Object>> */ {
-    return compareArrayElements(a, _1, _2)
-      .then((a) => {
-        return D.swapCells(
-          a,
-          _1,
-          _2,
-          config.CONTAINER_ID,
-          config.CONSTANT_TRANSITION_SPEED,
-          config.MAX_SECONDS_TRANSITION_INTERVAL,
-          config.COLS, config.ROWS
-        )
+    a /*: Array<Object> */,
+    _1 /*: number */,
+    _2 /*: number */
+  ) /*: Promise<Array<Object>> */ {
+    return setDisplayOnPreviousElement(a, _1)
+      .then(() => {
+        return checkCurrentWithPrevious(a, _1, _2)
           .then((a) => {
-            return swapArrayElements(a, _1, _2)
+            return D.swapCells(
+              a,
+              _1,
+              _2,
+              config.CONTAINER_ID,
+              config.CONSTANT_TRANSITION_SPEED,
+              config.MAX_SECONDS_TRANSITION_INTERVAL,
+              config.COLS, config.ROWS
+            )
+              .then((a) => {
+                return swapArrayElements(a, _1, _2)
+              })
           })
-      })
-      .catch((e) => {
-        return Promise.resolve(a)
+          .catch((e) => {
+            return Promise.resolve(a)
+          })
       })
   }
 
-  function compareArrayElements (
+  function setDisplayOnPreviousElement (
+    a/* :Array<Object> */,
+    _1/* :number */
+  ) /*: Promise<Array<Object>> */ {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        D.setCellDisplay(_1, 'add', 'actively-looking', config.CONTAINER_ID, config.SHOW_WORKING)
+        return resolve(a)
+      }, config.CLICK * 1)
+    })
+  }
+
+  function checkCurrentWithPrevious (
     a/* :Array<Object> */,
     _1/* :number */,
     _2/* :number */
-  ) {
+  ) /*: Promise<Array<Object>> */ {
     return new Promise((resolve, reject) => {
-      D.setCellDisplay(_1, 'add', 'actively-looking', config.CONTAINER_ID, config.SHOW_WORKING)
       setTimeout(() => {
         if (a[_1].value > a[_2].value) {
           D.setCellDisplay(_1, 'remove', 'actively-looking', config.CONTAINER_ID, config.SHOW_WORKING)
@@ -228,7 +242,6 @@ export function bubbleSortFactory (
     loop,
     pauseAndLoop,
     swap,
-    compareArrayElements,
     swapArrayElements,
     makeArrayToSort,
     setReload,
