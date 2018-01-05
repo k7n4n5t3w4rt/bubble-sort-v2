@@ -9,7 +9,18 @@ import './BubbleSort.css'
 import './grid-display/main.css'
 import './grid-display/font-awesome/css/font-awesome.min.css'
 
-class BubbleSort extends Component {
+// NOTE: the actual type of ALGORITHMS and COUNT don't have any effect
+/*::
+type Props = {
+  finishCounter: {
+    ALGORITHMS: Array<Object>,
+    COUNT: number
+  }
+}
+*/
+
+class BubbleSort extends Component<Props> { // Can't work out comment syntax for <Props>
+  props /*: Props */
   render = () => {
     return (
       <div id="bubble-sort" className="viz"></div>
