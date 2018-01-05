@@ -12,6 +12,7 @@ import './grid-display/font-awesome/css/font-awesome.min.css'
 // NOTE: the actual type of ALGORITHMS and COUNT don't have any effect
 /*::
 type Props = {
+  containerId: string,
   finishCounter: {
     ALGORITHMS: Array<Object>,
     COUNT: number
@@ -23,7 +24,7 @@ class BubbleSort extends Component<Props> { // Can't work out comment syntax for
   props /*: Props */
   render = () => {
     return (
-      <div id="bubble-sort" className="viz"></div>
+      <div id={this.props.containerId} className="viz bubble-sort"></div>
     )
   }
 
@@ -39,11 +40,8 @@ class BubbleSort extends Component<Props> { // Can't work out comment syntax for
       RELOAD_INTERVAL: 2000,
       CONSTANT_TRANSITION_SPEED: true,
       FINISH_COUNTER: this.props.finishCounter,
-      CONTAINER_ID: 'bubble-sort'
+      CONTAINER_ID: this.props.containerId
     }
-
-    console.log('BubbleSort.conponentDidMount', this.props.finishCounter)
-
     // --------------------------------- //
     // SELECTION SORT
     // --------------------------------- //

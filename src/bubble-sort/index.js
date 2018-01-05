@@ -15,9 +15,9 @@ export function bubbleSortFactory (
     LOOP = true,
     RELOAD_INTERVAL = 1000,
     FINISH_COUNTER = {}
-  }/* :Object */,
-  gridDisplay/* :function */
-) /* :Object */ {
+  } /*: Object */,
+  gridDisplay /*: function */
+) /*: Object */ {
   const config = {
     CONTAINER_ID,
     SHOW_WORKING,
@@ -36,7 +36,7 @@ export function bubbleSortFactory (
   const D = gridDisplay()
   config.CLICK = D.getClick(config.SHOW_WORKING, config.FPS, config.ACCELLERATION)
 
-  function run () /* :void */ {
+  function run () /*: void */ {
     // The input
     const a = makeArrayToSort(config.COLS, config.ROWS)
     D.displayGrid(
@@ -51,9 +51,9 @@ export function bubbleSortFactory (
   }
 
   function loop (
-    a/* :Array<Object> */,
-    i/* :number */,
-    end/* :number */
+    a /*: Array<Object> */,
+    i /*: number */,
+    end /*: number */
   ) /* void */ {
     if (
       config.LOOP &&
@@ -78,7 +78,7 @@ export function bubbleSortFactory (
       })
   }
 
-  function thereAreMultipleAlgorithmsOnView () /* :boolean */ {
+  function thereAreMultipleAlgorithmsOnView () /*: boolean */ {
     // TODO: Put in a @flow type for the config object
     if (
       config.FINISH_COUNTER &&
@@ -98,7 +98,6 @@ export function bubbleSortFactory (
       thereAreMultipleAlgorithmsOnView()
     ) {
       ++config.FINISH_COUNTER.COUNT
-      console.log(config.FINISH_COUNTER.COUNT)
       if (
         config.FINISH_COUNTER.COUNT === config.FINISH_COUNTER.ALGORITHMS.length
       ) {
@@ -110,14 +109,14 @@ export function bubbleSortFactory (
   }
 
   function reloadIfFinishedLooping (
-    reloadInterval /* :number */
+    reloadInterval /*: number */
   ) /*: void */ {
     if (allAlgorithmsHaveFinished()) {
       setReload(reloadInterval)
     }
   }
 
-  function toggleShowWorking () /* :void */ {
+  function toggleShowWorking () /*: void */ {
     config.SHOW_WORKING = !config.SHOW_WORKING
     config.CLICK = D.getClick(config.SHOW_WORKING, config.FPS, config.ACCELLERATION)
     D.clearShowWorkingCellsDisplay(
@@ -128,10 +127,10 @@ export function bubbleSortFactory (
   }
 
   function pauseAndLoop (
-    a/* :Array<Object> */,
-    i/* :number */,
-    end/* :number */
-  ) /* :void */ {
+    a /*: Array<Object> */,
+    i /*: number */,
+    end /*: number */
+  ) /*: void */ {
     setTimeout(() => {
       loop(a, i, end)
     }, config.CLICK * 1)
@@ -166,8 +165,8 @@ export function bubbleSortFactory (
   }
 
   function setDisplayOnPreviousElement (
-    a/* :Array<Object> */,
-    _1/* :number */
+    a /*: Array<Object> */,
+    _1 /*: number */
   ) /*: Promise<Array<Object>> */ {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -178,9 +177,9 @@ export function bubbleSortFactory (
   }
 
   function checkCurrentWithPrevious (
-    a/* :Array<Object> */,
-    _1/* :number */,
-    _2/* :number */
+    a /*: Array<Object> */,
+    _1 /*: number */,
+    _2 /*: number */
   ) /*: Promise<Array<Object>> */ {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -197,9 +196,9 @@ export function bubbleSortFactory (
   }
 
   function swapArrayElements (
-    a/* :Array<Object> */,
-    _1/* :number */,
-    _2/* :number */
+    a /*: Array<Object> */,
+    _1 /*: number */,
+    _2 /*: number */
   ) {
     const tmpValue = a[_1].value
     a[_1].value = a[_2].value
@@ -208,9 +207,9 @@ export function bubbleSortFactory (
   }
 
   function makeArrayToSort (
-    cols/* :number */,
-    rows/* :number */
-  ) /* :Array<Object> */ {
+    cols /*: number */,
+    rows /*: number */
+  ) /*: Array<Object> */ {
     const numItems = cols * rows
     const a = []
     let randomNumber = 0
@@ -225,8 +224,8 @@ export function bubbleSortFactory (
   }
 
   function setReload (
-    reloadInterval /* :number */
-  ) /* :void */ {
+    reloadInterval /*: number */
+  ) /*: void */ {
     if (thereAreMultipleAlgorithmsOnView()) {
       config.FINISH_COUNTER.ALGORITHMS.forEach((algorithm) => {
         setTimeout(() => { algorithm.run() }, reloadInterval)
@@ -243,6 +242,8 @@ export function bubbleSortFactory (
     pauseAndLoop,
     swap,
     swapArrayElements,
+    setDisplayOnPreviousElement,
+    checkCurrentWithPrevious,
     makeArrayToSort,
     setReload,
     toggleShowWorking,
