@@ -31,10 +31,10 @@ class BubbleSort extends Component<Props> { // Can't work out comment syntax for
     // Config
     const bubbleConf = {
       FPS: 10,
-      MAX_SECONDS_TRANSITION_INTERVAL: 0.5,
+      MAX_SECONDS_TRANSITION_INTERVAL: 1,
       COLS: 4,
       ROWS: 4,
-      SHOW_WORKING: false,
+      SHOW_WORKING: true,
       LOOP: true,
       RELOAD_INTERVAL: 2000,
       CONSTANT_TRANSITION_SPEED: true,
